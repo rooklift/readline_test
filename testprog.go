@@ -5,20 +5,12 @@ import (
 	"strconv"
 )
 
-const DEFAULT_N = 256
-
 func main() {
 
 	var n int
-	var err error
 
 	if len(os.Args) > 1 {
-		n, err = strconv.Atoi(os.Args[1])
-		if err != nil {
-			n = DEFAULT_N
-		}
-	} else {
-		n = DEFAULT_N
+		n, _ = strconv.Atoi(os.Args[1])
 	}
 
 	for i := 0; i <= n; i += 100000 {
