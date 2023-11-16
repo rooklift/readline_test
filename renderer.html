@@ -23,8 +23,8 @@
 		});
 
 		scanner.on("line", (line) => {
-			document.getElementById("para").innerHTML += `<br>${n} succeeded. (len == ${line.length}, last char == ${line[line.length - 1]})`;
-			if (n < 10000000) {
+			document.getElementById("para").innerHTML += `<br>${n} succeeded. (len == ${line.length}, end == ${line.slice(-6)})`;
+			if (n < 50000000) {
 				try_n(n + 50000);
 			}
 		});
