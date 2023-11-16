@@ -21,7 +21,9 @@ func main() {
 		n = DEFAULT_N
 	}
 
-	output(n)
+	for i := 0; i <= n; i += 100000 {
+		output(i)
+	}
 }
 
 func output(n int) {

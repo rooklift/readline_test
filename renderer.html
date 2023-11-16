@@ -10,28 +10,20 @@
 	const path = require("path");
 	const readline = require("readline");
 
-	function try_n(n) {
+	let exe = child_process.spawn(
+		path.join(__dirname, "testprog.exe"),
+		["50000000"]
+	);
 
-		let exe = child_process.spawn(
-			path.join(__dirname, "testprog.exe"),
-			[n.toString()]
-		);
+	let scanner = readline.createInterface({
+		input: exe.stdout,
+		output: undefined,
+		terminal: false
+	});
 
-		let scanner = readline.createInterface({
-			input: exe.stdout,
-			output: undefined,
-			terminal: false
-		});
-
-		scanner.on("line", (line) => {
-			document.getElementById("para").innerHTML += `<br>${n} succeeded. (len: ${line.length}, end: ${line.slice(-6)})`;
-			if (n < 50000000) {
-				try_n(n + 100000);
-			}
-		});
-	}
-
-	try_n(0);
+	scanner.on("line", (line) => {
+		document.getElementById("para").innerHTML += `<br>Got line, len: ${line.length}, end: ${line.slice(-6)})`;
+	});
 
 </script>
 </html>
