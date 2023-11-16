@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head><title>Electron Readline Test</title></head>
+<body>
+	<p id="para">Running...</p>
+</body>
+<script>
+
+	const child_process = require("child_process");
+	const readline = require("readline");
+
+	function try_n(n) {
+
+		let exe = child_process.spawn(
+			"testprog.exe",
+			[n.toString()]
+		);
+
+		let scanner = readline.createInterface({
+			input: exe.stdout,
+			output: undefined,
+			terminal: false
+		});
+
+		scanner.on("line", (line) => {
+			document.getElementById("para").innerHTML += `<br>${n} succeeded. (len == ${line.length}, last char == ${line[line.length - 1]})`;
+			if (n < 10000000) {
+				try_n(n + 50000);
+			}
+		});
+	}
+
+	try_n(0);
+
+</script>
+</html>
